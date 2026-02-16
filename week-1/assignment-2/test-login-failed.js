@@ -19,7 +19,7 @@ async function testLoginFailed() {
 
     await driver.sleep(2000);
 
-    // Try successful login
+    // Try failed login
     const usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
     await usernameField.sendKeys('wrong_user');
 
@@ -31,7 +31,7 @@ async function testLoginFailed() {
 
     await driver.sleep(2000);
 
-    // Verify successful login
+    // Verify failed login
     const inventoryHeader = await driver.findElement({ xpath: '//*[@id="login_button_container"]/div/form/div[3]' });
     const inventoryHeaderText = await inventoryHeader.getText();
 
