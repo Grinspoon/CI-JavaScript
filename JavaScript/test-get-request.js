@@ -15,7 +15,7 @@ async function getRequest() {
     .setChromeOptions(options)
     .build();
 
-  // Get API response from fakestoreapi.com
+  // Get API response
   let xhr = new XMLHttpRequest()
   xhr.open('GET', 'https://fakestoreapi.com/products')
 
