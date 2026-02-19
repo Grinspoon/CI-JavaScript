@@ -21,7 +21,7 @@ describe('GitHub Actions CI (JS)', function() {
     });
 
     // Validate API response
-    it('test', async function() {
+    it('Response validation', async function() {
     
     await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();

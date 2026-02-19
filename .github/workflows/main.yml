@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Selenium tests and generate report
-        run: npx mocha test-get-request-mocha.js --reporter mochawesome
+        run: npx mocha --reporter mochawesome
       - name: Upload Mochawesome report
         uses: actions/upload-artifact@v4
         with:
