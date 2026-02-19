@@ -27,7 +27,7 @@ async function login() {
     { username_failed: 'no_login', password_failed: 'no_login' }
   ];
 
-  // Automate passed login
+  // Automate successful login
   for (const selected of credentials_passed) {
     let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
     await usernameField.sendKeys(selected.username_passed);
