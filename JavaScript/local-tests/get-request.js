@@ -26,9 +26,9 @@ async function getRequest() {
 
     // Validate API response
     if (API_response.length !== undefined && xhr.status == 200) {
-      console.log('- Passed: Got a 200 response from API')
+      console.log('- Passed: Got a 200 status response from the API')
     } else {
-      console.log('- Failed: 200 response failed from the API, instead got:', xhr.status)
+      console.log('- Failed: 200 status response failed from the API, instead got:', xhr.status)
     }
 
     // Validate number of total ID's (Products) and compare with mock data
