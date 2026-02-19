@@ -43,11 +43,11 @@ async function login() {
   const inventoryHeader = await driver.findElement({ xpath: '//*[@id="header_container"]/div[2]/span' });
   const inventoryHeaderText = await inventoryHeader.getText();
 
+  assert.equal(inventoryHeaderText, 'Products');
+
   if (inventoryHeader) {
     console.log('- Passed: Login');
   }
-
-  assert.equal(inventoryHeaderText, 'Products');
 
   await driver.sleep(2000);
 
