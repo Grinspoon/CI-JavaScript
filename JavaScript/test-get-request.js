@@ -66,6 +66,9 @@ async function getRequest() {
     }
   }
 
+  xhr.onerror = function (err) {
+    reject(new Error('Network error during XHR'));
+};
   xhr.send()
 
   await driver.quit();
