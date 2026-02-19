@@ -43,16 +43,22 @@ async function getRequest() {
       console.log('- Failed: Total number of IDs from API response');
     }
 
-    // Validate content of product ID 15
+    // Validate items of product ID 15 and compare with mock data
     if (API_response.length !== undefined && Object.keys(API_id15).length == 7) {
-      assert.equal(mockData_id15.id, API_id15.id);
-      assert.equal(mockData_id15.title, API_id15.title);
-      assert.equal(mockData_id15.price, API_id15.price);
-      assert.equal(mockData_id15.category, API_id15.category);
-      assert.equal(mockData_id15.description, API_id15.description);
-      assert.equal(mockData_id15.image, API_id15.image);
-      assert.equal(mockData_id15.rating.rate, API_id15.rating.rate);
-      assert.equal(mockData_id15.rating.count, API_id15.rating.count);
+
+      // First level array validation
+      const levelOneKeys = ['id', 'title', 'price', 'category', 'description', 'image'];
+      for (const key of levelOneKeys) {
+        assert.equal(mockData_id15[key], API_id15[key]);
+      }
+      // Second level array validation
+      const levelTwoKeys = ['rate', 'count'];
+      for (const key of levelTwoKeys) {
+        assert.equal(
+          mockData_id15.rating[key],
+          API_id15.rating[key]
+        );
+      }
 
       console.log('- Passed: Validate all items of product ID 15');
     } else {
