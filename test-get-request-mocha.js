@@ -12,6 +12,8 @@ describe('GitHub Actions CI (JS)', function() {
         options.addArguments('--headless');
         options.addArguments('--no-sandbox');
         options.addArguments('--disable-dev-shm-usage');
+        options.addArguments('--reporter=./node_modules/mochawesome');
+        options.addArguments('--reporter-options reportDir=mochawesome-report,reportFilename=index,quiet=true');
         driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
     });
     after(async function() {
