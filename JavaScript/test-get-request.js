@@ -26,24 +26,24 @@ async function getRequest() {
 
     // Validate API response
     if (API_response.length !== undefined && xhr.status == 200) {
-      console.log('- Passed: 200 response from API')
+      console.log('- Passed: Got a 200 response from API')
     } else {
-      console.log('- Failed: 200 response from API, instead got:', xhr.status)
+      console.log('- Failed: 200 response failed from the API, instead got:', xhr.status)
     }
 
-    // Validate number of IDs (Products)
+    // Validate number of total ID's (Products) and compare with mock data
     if (API_response.length !== undefined) {
       let idCount = 0;
       idCount = API_response.filter(item => item).length;
 
       assert.equal(mockData.length, idCount);
 
-      console.log('- Passed: Total number of IDs from API response');
+      console.log(`- Passed: Number of ID's from API response, total ID's: ${mockData.length}/${idCount}`);
     } else {
-      console.log('- Failed: Total number of IDs from API response');
+      console.log(`- Failed: Number of ID's from API response`);
     }
 
-    // Validate items of product ID 15 and compare with mock data
+    // Validate items and content of product with ID 15 and compare with mock data
     if (API_response.length !== undefined && Object.keys(API_id15).length == 7) {
 
       // First level array validation
@@ -60,9 +60,9 @@ async function getRequest() {
         );
       }
 
-      console.log('- Passed: Validate all items of product ID 15');
+      console.log('- Passed: Validated all items and content of product with ID 15, total items:', Object.keys(API_id15).length);
     } else {
-      console.log('- Failed: Validate all items of product ID 15')
+      console.log('- Failed: Validate all items and content of product with ID 15');
     }
   }
 
