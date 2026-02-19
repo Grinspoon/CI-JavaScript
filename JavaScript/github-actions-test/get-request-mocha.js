@@ -6,6 +6,7 @@ describe('GitHub Actions CI (JS)', function() {
     let driver;
 
     before(async function() {
+        
         // Run headless Chrome instance
         const chrome = require('selenium-webdriver/chrome');
         const options = new chrome.Options();
@@ -21,23 +22,19 @@ describe('GitHub Actions CI (JS)', function() {
     // Validate API response
     it('Response validation', async function() {
     
-    await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://fakestoreapi.com/products');
-        xhr.onload = function () {
-            try {
-                assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
-        };
+        await new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://fakestoreapi.com/products');
+            xhr.onload = function () {
+                try {
+                    assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
+                    resolve();
+                } catch (e) {
+                    reject(e);
+                }
+            };
 
-        xhr.onerror = function (err) {
-            reject(new Error('Network error during XHR'));
-        };
-        xhr.send();
-    });
-
+            xhr.send();
+        });
     });
 });
