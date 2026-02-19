@@ -2,7 +2,7 @@ const { Builder } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const mockData = require('../api-mock-data/mock-data.json');
+const mockData = require('./api-mock-data/mock-data.json');
 
 // Run headless Chrome instance
 async function getRequest() {
