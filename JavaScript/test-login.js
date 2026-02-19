@@ -36,7 +36,6 @@ async function login() {
   let loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
   await loginButton.click();
 
-
   // Validate successful login
   const inventoryHeader = await driver.findElement({ xpath: '//*[@id="header_container"]/div[2]/span' });
   const inventoryHeaderText = await inventoryHeader.getText();
@@ -44,7 +43,9 @@ async function login() {
   assert.equal(inventoryHeaderText, 'Products');
 
   if (inventoryHeader) {
-    console.log('- Passed: Login');
+    console.log('- Login successful: Passed');
+  } else {
+    console.log('- Login successful: Failed');
   }
 
   await driver.sleep(2000);
@@ -73,8 +74,18 @@ async function login() {
   await loginButton.click();
 
   // Validate failed login
+  const errorMessage = await driver.findElement({ xpath: '//*[@data-test="error"]' });
+  const errorMessageText = await errorMessage.getText();
+
+  assert.equal(
+    errorMessageText,
+    'Epic sadface: Username and password do not match any user in this service'
+  );
+
   if (inventoryHeader) {
-    console.log('- Failed: Login');
+    console.log('- Login unsuccessful: Passed');
+  } else {
+    console.log('- Login unsuccessful: Failed');
   }
 
   await driver.sleep(2000);
