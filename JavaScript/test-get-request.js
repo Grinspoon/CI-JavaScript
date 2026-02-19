@@ -25,14 +25,14 @@ async function getRequest() {
     let mockData_id15 = mockData.find(item => item && item.id === 15);
 
     // Validate API response
-    if (xhr.status == 200) {
+    if (API_response.length !== undefined && xhr.status == 200) {
       console.log('- Passed: 200 response from API')
     } else {
       console.log('- Failed: 200 response from API, instead got:', xhr.status)
     }
 
     // Validate number of IDs (Products)
-    if (API_response) {
+    if (API_response.length !== undefined) {
       let idCount = 0;
       idCount = API_response.filter(item => item).length;
 
@@ -44,7 +44,7 @@ async function getRequest() {
     }
 
     // Validate content of product ID 15
-    if (API_response && Object.keys(API_id15).length == 7) {
+    if (API_response.length !== undefined && Object.keys(API_id15).length == 7) {
       assert.equal(mockData_id15.id, API_id15.id);
       assert.equal(mockData_id15.title, API_id15.title);
       assert.equal(mockData_id15.price, API_id15.price);
