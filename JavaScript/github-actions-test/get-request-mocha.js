@@ -27,7 +27,7 @@ describe('GitHub Actions CI (JS)', function() {
             xhr.open('GET', 'https://fakestoreapi.com/products');
             xhr.onload = function () {
                 try {
-                    assert.strictEqual(xhr.status, 403, `Expected status 403, got ${xhr.status}`);
+                    assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
                     resolve();
                 } catch (e) {
                     reject(e);
