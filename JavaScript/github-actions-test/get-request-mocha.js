@@ -15,6 +15,7 @@ describe('GitHub Actions CI (JS)', function() {
         options.addArguments('--disable-dev-shm-usage');
         driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
     });
+    
     after(async function() {
         await driver.quit();
     });
