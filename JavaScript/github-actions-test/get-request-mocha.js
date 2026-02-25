@@ -15,7 +15,7 @@ describe('GitHub Actions CI (JS)', function() {
         options.addArguments('--disable-dev-shm-usage');
         driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
     });
-    
+
     after(async function() {
         await driver.quit();
     });
@@ -35,6 +35,9 @@ describe('GitHub Actions CI (JS)', function() {
                 }
             };
 
+            xhr.onerror = function (err) {
+                reject(new Error('Network error during XHR'));
+            };
             xhr.send();
         });
     });
