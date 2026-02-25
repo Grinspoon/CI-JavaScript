@@ -44,7 +44,7 @@ async function getRequest() {
     }
 
     // Validate items and content of product with ID 15 and compare with mock data
-    if (API_response.length !== undefined && Object.keys(API_id15).length == 7) {
+    if (Object.keys(API_id15).length == 7 && API_response.length !== undefined) {
 
       // First level array validation
       const levelOneKeys = ['id', 'title', 'price', 'category', 'description', 'image'];
