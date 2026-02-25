@@ -27,10 +27,10 @@ async function login() {
   // Automate successful login
   const userPassed = credentials.find(item => item.type === 'passed');
 
-  let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
+  usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
   await usernameField.sendKeys(userPassed.username);
 
-  let passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
+  passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
   await passwordField.sendKeys(userPassed.password);
 
   let loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
