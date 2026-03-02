@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class login {
     public static void main(String[] args) {
+        // Initialize with incognito flag
         org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
         options.addArguments("--incognito");
         WebDriver driver = new ChromeDriver(options);
