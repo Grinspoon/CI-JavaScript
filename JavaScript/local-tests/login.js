@@ -2,7 +2,7 @@ const { Builder } = require('selenium-webdriver');
 const assert = require('assert');
 const chrome = require('selenium-webdriver/chrome');
 
-// Open Google Chrome
+// Initialize with incognito flag
 async function login() {
   let options = new chrome.Options();
   options.addArguments('--incognito');
@@ -16,7 +16,7 @@ async function login() {
   await driver.get('https://www.saucedemo.com');
   await driver.manage().window().maximize();
 
-  await driver.sleep(2000);
+  await driver.sleep(1000);
 
   // Setup credentials
   const credentials = [
