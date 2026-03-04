@@ -2,7 +2,7 @@ const { Builder } = require('selenium-webdriver');
 const assert = require('assert');
 const chrome = require('selenium-webdriver/chrome');
 
-// Initialize with incognito flag
+// Initialize options with incognito argument
 async function login() {
   let options = new chrome.Options();
   options.addArguments('--incognito');

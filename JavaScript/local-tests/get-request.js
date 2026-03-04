@@ -15,7 +15,7 @@ async function getRequest() {
     .setChromeOptions(options)
     .build();
 
-  // Get API response
+  // GET Request
   let xhr = new XMLHttpRequest()
   xhr.open('GET', 'https://fakestoreapi.com/products')
 
@@ -24,7 +24,7 @@ async function getRequest() {
     let API_id15 = API_response.find(item => item && item.id === 15);
     let mockData_id15 = mockData.find(item => item && item.id === 15);
 
-    // Validate API response
+    // Validate GET Response
     if (API_response.length !== undefined && xhr.status == 200) {
       console.log('- Passed: Got a 200 status response from the API')
     } else {
