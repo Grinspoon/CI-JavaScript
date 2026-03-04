@@ -1,4 +1,4 @@
-name: Run Selenium Tests and Generate Report (JS)
+name: Run tests (JavaScript)
 on:
   push:
     branches:
