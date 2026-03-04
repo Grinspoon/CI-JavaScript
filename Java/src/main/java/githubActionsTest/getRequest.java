@@ -6,7 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class getRequest {
-    void main() {
+    public static void main(String[] args) {
         try {
             URI url = new URI("https://fakestoreapi.com/products");
             HttpClient client = HttpClient.newHttpClient();
