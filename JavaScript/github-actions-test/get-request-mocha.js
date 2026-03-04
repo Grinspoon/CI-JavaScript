@@ -20,7 +20,7 @@ describe('GitHub Actions CI (JS)', function() {
         await driver.quit();
     });
 
-    // Validate API response
+    // Validate GET Request
     it('Response status validation', async function() {
     
         await new Promise((resolve, reject) => {
@@ -34,6 +34,12 @@ describe('GitHub Actions CI (JS)', function() {
                     reject(e);
                 }
             };
+
+            if (xhr.status == 200) {
+                console.log("test 200");
+            } else {
+                "asd " + xhr.status
+            }
 
             xhr.onerror = function (err) {
                 reject(new Error('Network error during XHR'));
