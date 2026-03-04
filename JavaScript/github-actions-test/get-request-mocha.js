@@ -27,11 +27,6 @@ describe('GitHub Actions CI (JS)', function() {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', 'https://fakestoreapi.com/products');
             xhr.onload = function () {
-                if (xhr.status == 200) {
-                    console.log("test 200");
-                } else {
-                    "asd " + xhr.status
-                }
                 try {
                     assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
                     resolve();
