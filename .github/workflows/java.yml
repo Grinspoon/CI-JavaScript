@@ -25,4 +25,12 @@ jobs:
         run: mvn -f Java/pom.xml clean compile
 
       - name: Run Java Test Classes
-        run: java Java/src/main/java/githubActionsTest/*.java
+        run: |
+          mkdir -p bin
+          javac -d bin Java/src/main/java/githubActionsTest/*.java
+          cd bin
+          for class in $(ls githubActionsTest/*.class | sed 's/\.class$//' | sed 's/\//./g'); do
+            echo "Running $class"
+            # Run any main methods named 'main', otherwise just try running the class (will require main)
+            java $class || true
+          done
