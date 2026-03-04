@@ -18,7 +18,7 @@ public class getRequest {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
-                System.out.println("Passed: Got a 200 status response from the API");
+                System.out.println("Passed: Response is: " + response.body());
             } else {
                 System.out.println("Failed: Expected 200 status response, but got: " + response.statusCode());
             }
