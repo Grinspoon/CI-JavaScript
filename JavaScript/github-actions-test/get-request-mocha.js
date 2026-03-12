@@ -22,7 +22,6 @@ describe('GitHub Actions CI (JS)', function() {
 
     // Validate GET Request
     it('Response status validation', async function() {
-    
         await new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', 'https://fakestoreapi.com/products');
@@ -34,7 +33,6 @@ describe('GitHub Actions CI (JS)', function() {
                     reject(e);
                 }
             };
-
 
             xhr.onerror = function (err) {
                 reject(new Error('Network error during XHR'));
