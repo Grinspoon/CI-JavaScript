@@ -40,7 +40,7 @@ async function getRequest() {
 
       console.log(`- Passed: Number of ID's from API response, total ID's: ${mockData.length}/${idCount}`);
     } else {
-      console.log(`- Failed: Number of ID's from API response`);
+      console.log(`- Failed: Number of ID's from API response: ${mockData.length}/${idCount}`);
     }
 
     // Validate items and content of product with ID 15 and compare with mock data
