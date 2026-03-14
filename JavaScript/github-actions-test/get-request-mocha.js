@@ -7,7 +7,7 @@ describe('GitHub Actions CI (JS)', function() {
 
     before(async function() {
         
-        // Run headless Chrome instance
+        // Run headless instance
         const chrome = require('selenium-webdriver/chrome');
         const options = new chrome.Options();
         options.addArguments('--headless');

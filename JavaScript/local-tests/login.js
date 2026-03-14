@@ -2,95 +2,81 @@ const { Builder } = require('selenium-webdriver');
 const assert = require('assert');
 const chrome = require('selenium-webdriver/chrome');
 
-// Initialize options with incognito argument
-async function login() {
-  let options = new chrome.Options();
-  options.addArguments('--incognito');
+describe('Login functionality on saucedemo.com', function () {
+  let driver;
 
-  let driver = await new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
+  // Timeout for slow environments
+  this.timeout(20000);
 
-  // Navigate to saucedemo
-  await driver.get('https://www.saucedemo.com');
-  await driver.manage().window().maximize();
+  before(async function () {
+    // Run headless instance
+    let options = new chrome.Options();
+    options.addArguments("--incognito");
+    options.addArguments("--headless");
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    driver = await new Builder()
+      .forBrowser('chrome')
+      .setChromeOptions(options)
+      .build();
+    await driver.get('https://www.saucedemo.com');
+  });
 
-  await driver.sleep(1000);
+  after(async function () {
+    await driver.quit();
+  });
 
-  // Setup credentials
+  // Setup user credentials
   const credentials = [
     { username: 'visual_user', password: 'secret_sauce', type: 'passed' },
     { username: 'wrong_user', password: 'no_secret_sauce', type: 'failed' }
   ];
 
-  // Automate successful login
-  const userPassed = credentials.find(item => item.type === 'passed');
+  it('should login successfully with correct credentials', async function () {
+    const userPassed = credentials.find(item => item.type === 'passed');
 
-  usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
-  await usernameField.sendKeys(userPassed.username);
+    let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
+    await usernameField.sendKeys(userPassed.username);
+    let passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
+    await passwordField.sendKeys(userPassed.password);
+    let loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
+    await loginButton.click();
 
-  passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
-  await passwordField.sendKeys(userPassed.password);
+    // Validate successful login
+    const inventoryHeader = await driver.findElement({ xpath: '//*[@id="header_container"]/div[2]/span' });
+    const inventoryHeaderText = await inventoryHeader.getText();
+    assert.strictEqual(inventoryHeaderText, 'Products');
+  });
 
-  let loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
-  await loginButton.click();
+  it('should logout successfully', async function () {
+    const menuButton = await driver.findElement({ xpath: '//*[@id="react-burger-menu-btn"]' });
+    await menuButton.click();
+    await driver.sleep(1000);
+    const logoutButton = await driver.findElement({ xpath: '//*[@id="logout_sidebar_link"]' });
+    await logoutButton.click();
+    await driver.sleep(1000);
 
-  // Validate successful login
-  const inventoryHeader = await driver.findElement({ xpath: '//*[@id="header_container"]/div[2]/span' });
-  const inventoryHeaderText = await inventoryHeader.getText();
+    // Validate successful logout
+    const loginBtnExists = await driver.findElement({ xpath: '//*[@id="login-button"]' });
+    assert.ok(loginBtnExists);
+  });
 
-  assert.equal(inventoryHeaderText, 'Products');
+  it('should show error on failed login attempt with wrong credentials', async function () {
+    const userFailed = credentials.find(item => item.type === 'failed');
 
-  if (inventoryHeader) {
-    console.log('- Login successful: Passed');
-  } else {
-    console.log('- Login successful: Failed');
-  }
+    let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
+    await usernameField.sendKeys(userFailed.username);
+    let passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
+    await passwordField.sendKeys(userFailed.password);
+    let loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
+    await loginButton.click();
+    const errorMessage = await driver.findElement({ xpath: '//*[@data-test="error"]' });
+    const errorMessageText = await errorMessage.getText();
 
-  await driver.sleep(2000);
-
-  // Automate logout
-  const menuButton = await driver.findElement({ xpath: '//*[@id="react-burger-menu-btn"]' })
-  await menuButton.click();
-
-  await driver.sleep(2000);
-
-  const logoutButton = await driver.findElement({ xpath: '//*[@id="logout_sidebar_link"]' })
-  await logoutButton.click();
-
-  await driver.sleep(2000);
-
-  // Automate failed login
-  const userFailed = credentials.find(item => item.type === 'failed');
-
-  usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
-  await usernameField.sendKeys(userFailed.username);
-
-  passwordField = await driver.findElement({ xpath: '//*[@id="password"]' });
-  await passwordField.sendKeys(userFailed.username);
-
-  loginButton = await driver.findElement({ xpath: '//*[@id="login-button"]' });
-  await loginButton.click();
-
-  // Validate failed login
-  const errorMessage = await driver.findElement({ xpath: '//*[@data-test="error"]' });
-  const errorMessageText = await errorMessage.getText();
-
-  assert.equal(
-    errorMessageText,
-    'Epic sadface: Username and password do not match any user in this service'
-  );
-
-  if (inventoryHeader) {
-    console.log('- Login unsuccessful: Passed');
-  } else {
-    console.log('- Login unsuccessful: Failed');
-  }
-
-  await driver.sleep(2000);
-
-  await driver.quit();
-}
-
-login();
+    // Validate unsuccessful login
+    assert.strictEqual(
+      errorMessageText,
+      'Epic sadface: Username and password do not match any user in this service'
+    );
+  });
+});
