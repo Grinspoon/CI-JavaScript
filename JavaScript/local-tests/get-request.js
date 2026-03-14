@@ -7,9 +7,6 @@ const mockData = require('./api-mock-data/mock-data.json');
 describe('API functionality on fakestoreapi.com/products', function () {
   let driver;
 
-    // Timeout for slow environments
-    this.timeout(20000);
-
   before(async function () {
     let options = new chrome.Options();
     options.addArguments("--headless");
