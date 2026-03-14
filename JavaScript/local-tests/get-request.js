@@ -9,7 +9,6 @@ describe('API functionality on fakestoreapi.com/products', function () {
 
   before(async function () {
     let options = new chrome.Options();
-    options.addArguments("--incognito");
     options.addArguments("--headless");
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
@@ -73,7 +72,7 @@ describe('API functionality on fakestoreapi.com/products', function () {
         }
       };
 
-      xhr.onerror = function () {
+      xhr.onerror = function (err) {
         reject(new Error('Network error during XHR'));
       };
       xhr.send();
