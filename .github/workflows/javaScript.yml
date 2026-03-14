@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  run-selenium:
+  run-javaScript-selenium-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
