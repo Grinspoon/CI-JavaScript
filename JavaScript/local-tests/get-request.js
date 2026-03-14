@@ -37,6 +37,7 @@ describe('API functionality on fakestoreapi.com/products', function () {
           const mockData_id15 = mockData.find(item => item && item.id === 15);
 
           // TEST 1: Validate GET Response
+          console.log(`Expected status 200, got ${xhr.status}`);
           assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
 
           // TEST 2: Validate number of total ID's (Products) and compare with mock data
