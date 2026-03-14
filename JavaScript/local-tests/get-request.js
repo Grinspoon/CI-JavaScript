@@ -68,7 +68,7 @@ describe('API functionality on fakestoreapi.com/products', function () {
 
           resolve();
         } catch (e) {
-          reject("Error: " + e.getMessage());
+          reject(e);
         }
       };
 
