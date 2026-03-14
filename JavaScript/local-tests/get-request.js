@@ -33,14 +33,22 @@ describe('API functionality on fakestoreapi.com/products', function () {
 
       xhr.onload = function () {
         try {
+          // Setup data to be used
+          let API_response;
+          try {
+            API_response = JSON.parse(xhr.responseText);
+          } catch (e) {
+            throw new Error(
+              `Failed to parse JSON. First 100 chars: ${xhr.responseText.substring(0, 100)}`
+            );
+          }
+
+          const API_id15 = API_response.find(item => item && item.id === 15);
+          const mockData_id15 = mockData.find(item => item && item.id === 15);
+
           // TEST 1: Validate GET Response
           console.log(`Expected status 200, got ${xhr.status}`);
           assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
-
-          // Setup data to be used
-          let API_response = JSON.parse(xhr.responseText);
-          const API_id15 = API_response.find(item => item && item.id === 15);
-          const mockData_id15 = mockData.find(item => item && item.id === 15);
 
           // TEST 1: Validate GET Response
           console.log(`Expected status 200, got ${xhr.status}`);
