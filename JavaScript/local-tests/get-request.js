@@ -28,13 +28,40 @@ describe('API functionality on fakestoreapi.com/products', function () {
 
   it("should validate GET response and API functionality", async function () {
     await new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest()
+      const xhr = new XMLHttpRequest();
       xhr.open('GET', 'https://fakestoreapi.com/products');
 
       xhr.onload = function () {
         try {
+          // TEST 1: Validate GET Response
+          console.log(`Expected status 200, got ${xhr.status}`);
+          assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
+
+          // Defensive: check if content-type is JSON and not HTML
+          const contentType = xhr.getResponseHeader && xhr.getResponseHeader('content-type');
+          if (!contentType || !contentType.includes('application/json')) {
+            throw new Error(
+              `Expected content-type application/json, got "${contentType}". Possible error page: ${xhr.responseText.substring(0, 100)}`
+            );
+          }
+
+          // Defensive: check if responseText starts with "<!" (likely HTML error page)
+          if (/^\s*</.test(xhr.responseText)) {
+            throw new Error(
+              `Response appears to be HTML error page: ${xhr.responseText.substring(0, 100)}`
+            );
+          }
+
           // Setup data to be used
-          const API_response = JSON.parse(xhr.responseText);
+          let API_response;
+          try {
+            API_response = JSON.parse(xhr.responseText);
+          } catch (e) {
+            throw new Error(
+              `Failed to parse JSON. First 100 chars: ${xhr.responseText.substring(0, 100)}`
+            );
+          }
+
           const API_id15 = API_response.find(item => item && item.id === 15);
           const mockData_id15 = mockData.find(item => item && item.id === 15);
 
