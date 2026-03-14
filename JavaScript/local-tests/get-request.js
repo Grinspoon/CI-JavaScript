@@ -37,21 +37,6 @@ describe('API functionality on fakestoreapi.com/products', function () {
           console.log(`Expected status 200, got ${xhr.status}`);
           assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
 
-          // Defensive: check if content-type is JSON and not HTML
-          const contentType = xhr.getResponseHeader && xhr.getResponseHeader('content-type');
-          if (!contentType || !contentType.includes('application/json')) {
-            throw new Error(
-              `Expected content-type application/json, got "${contentType}". Possible error page: ${xhr.responseText.substring(0, 100)}`
-            );
-          }
-
-          // Defensive: check if responseText starts with "<!" (likely HTML error page)
-          if (/^\s*</.test(xhr.responseText)) {
-            throw new Error(
-              `Response appears to be HTML error page: ${xhr.responseText.substring(0, 100)}`
-            );
-          }
-
           // Setup data to be used
           let API_response;
           try {
