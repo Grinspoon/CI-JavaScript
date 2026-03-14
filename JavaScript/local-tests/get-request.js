@@ -7,6 +7,9 @@ const mockData = require('./api-mock-data/mock-data.json');
 describe('API functionality on fakestoreapi.com/products', function () {
   let driver;
 
+    // Timeout for slow environments
+    this.timeout(20000);
+
   before(async function () {
     let options = new chrome.Options();
     options.addArguments("--headless");
@@ -36,9 +39,35 @@ describe('API functionality on fakestoreapi.com/products', function () {
           const mockData_id15 = mockData.find(item => item && item.id === 15);
 
           // TEST 1: Validate GET Response
+          console.log(`Expected status 200, got ${xhr.status}`);
           assert.strictEqual(xhr.status, 200, `Expected status 200, got ${xhr.status}`);
 
+          // TEST 2: Validate number of total ID's (Products) and compare with mock data
+          const idCount = API_response.filter(item => item).length;
+          assert.strictEqual(mockData.length, idCount, `Mismatch in product count: mockData(${mockData.length}) vs API(${idCount})`);
 
+          // TEST 3: Validate items and content of product with ID 15 and compare with mock data
+          assert.ok(API_id15 && mockData_id15, "Product with id 15 should exist in both API and mock data");
+          assert.strictEqual(Object.keys(API_id15).length, 7, "API product with id 15 should have 7 properties");
+
+          // TEST 4: Validate correct fields and data for ID 15
+          const levelOneKeys = ['id', 'title', 'price', 'category', 'description', 'image'];
+          for (const key of levelOneKeys) {
+            assert.strictEqual(
+              mockData_id15[key],
+              API_id15[key],
+              `Mismatch for property '${key}' for product id 15`
+            );
+          }
+
+          const levelTwoKeys = ['rate', 'count'];
+          for (const key of levelTwoKeys) {
+            assert.strictEqual(
+              mockData_id15.rating[key],
+              API_id15.rating[key],
+              `Mismatch for rating property '${key}' for product id 15`
+            );
+          }
 
           resolve();
         } catch (e) {
