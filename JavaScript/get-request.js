@@ -2,7 +2,7 @@ const { Builder } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const assert = require('assert');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const mockData = require('./api-mock-data/mock-data.json');
+const mockData = require('./mock-data/mock-data.json');
 
 describe('API functionality on fakestoreapi.com/products', function () {
   let driver;
