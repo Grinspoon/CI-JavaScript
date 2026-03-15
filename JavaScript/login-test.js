@@ -32,7 +32,7 @@ describe('Login functionality on saucedemo.com', function () {
     { username: 'wrong_user', password: 'no_secret_sauce', type: 'failed' }
   ];
 
-  it('should login successfully with correct credentials', async function () {
+  it('Should login successfully with correct credentials', async function () {
     const userPassed = credentials.find(item => item.type === 'passed');
 
     let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });
@@ -48,7 +48,7 @@ describe('Login functionality on saucedemo.com', function () {
     assert.strictEqual(inventoryHeaderText, 'Products');
   });
 
-  it('should logout successfully', async function () {
+  it('Should logout successfully', async function () {
     const menuButton = await driver.findElement({ xpath: '//*[@id="react-burger-menu-btn"]' });
     await menuButton.click();
     await driver.sleep(1000);
@@ -61,7 +61,7 @@ describe('Login functionality on saucedemo.com', function () {
     assert.ok(loginBtnExists);
   });
 
-  it('should show error on failed login attempt with wrong credentials', async function () {
+  it('Should show error on failed login attempt with wrong credentials', async function () {
     const userFailed = credentials.find(item => item.type === 'failed');
 
     let usernameField = await driver.findElement({ xpath: '//*[@id="user-name"]' });

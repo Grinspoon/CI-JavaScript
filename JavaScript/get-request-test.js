@@ -26,7 +26,7 @@ describe('API functionality on fakestoreapi.com/products', function () {
     await driver.quit();
   });
 
-  it("should validate GET response and API functionality", async function () {
+  it("Should validate GET response and API functionality", async function () {
     await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', 'https://fakestoreapi.com/products');
