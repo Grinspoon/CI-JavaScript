@@ -2,7 +2,7 @@
 
 ## Project description
 
-#### <u>Assignment Part 2</u>
+#### <span style="text-decoration: underline">Assignment Part 2</span>
 
 Test login functionality for https://www.saucedemo.com
 
@@ -12,7 +12,7 @@ Test login functionality for https://www.saucedemo.com
 
 *File path: JavaScript/login-test.js*
 
-#### <u>Assignment Part 3</u>
+#### <span style="text-decoration: underline">Assignment Part 3</span>
 
 Test GET request and API response for https://fakestoreapi.com/products.
 
