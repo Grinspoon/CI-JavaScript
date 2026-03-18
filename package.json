@@ -1,7 +1,7 @@
 {
-  "name": "assignment",
+  "name": "CI-JavaScript",
   "version": "1.0.0",
-  "description": "",
+  "description": "Selenium with GitHub Actions testing",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
