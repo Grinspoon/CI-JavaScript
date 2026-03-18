@@ -2,13 +2,12 @@
   "name": "CI-JavaScript",
   "version": "1.0.0",
   "description": "Selenium with GitHub Actions testing",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Jens Nordström",
   "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "mocha": "^11.7.5",
     "save-dev": "^0.0.1-security",
