@@ -30,9 +30,9 @@ Test GET request and API response for https://fakestoreapi.com/products.
 - Part 2: Test should pass
 - Part 3: Test should fail with AssertionError [ERR_ASSERTION]: Expected status 200, instead got: 403
 
-## Installation and how to run the project locally
+## How to install and run the project locally
 
-1. Check your local Chrome version and download corresponding chromedriver: https://googlechromelabs.github.io/chrome-for-testing/#stable
+1. Check your Chrome version and download corresponding chromedriver: https://googlechromelabs.github.io/chrome-for-testing/#stable
 2. Add the chromedriver to your respective operating system
 3. Install node.js: https://nodejs.org/en or with brew
 4. Open the terminal and go to the root of the project
