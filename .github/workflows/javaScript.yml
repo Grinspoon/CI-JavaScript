@@ -1,4 +1,4 @@
-name: Run tests (JavaScript)
+name: JavaScript CI
 on:
   push:
     branches:
