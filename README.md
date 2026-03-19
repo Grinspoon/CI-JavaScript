@@ -27,7 +27,7 @@ Test GET request and API response for https://fakestoreapi.com/products.
 ## GitHub Actions
 
 - Check the log of the latest push in the "Run Selenium tests"-build step: https://github.com/Grinspoon/CI-JavaScript/actions
-- Part 2: Test should pass
+- Part 2: All tests should pass
 - Part 3: Test should fail with AssertionError [ERR_ASSERTION]: Expected status 200, instead got: 403
 
 ## How to install and run the project locally
